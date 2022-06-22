@@ -1,17 +1,22 @@
 import React from 'react'
+import {FilterType} from "./HW2";
+import style from './Affairs.module.css'
 
 type AffairPropsType = {
-    // key не нужно типизировать
-    affair: any // need to fix any
-    deleteAffairCallback: any // need to fix any
+
+    affair: string
+    deleteAffairCallback: ()=>void
+    priority:FilterType
 }
 
 function Affair(props: AffairPropsType) {
-    const deleteCallback = () => {}// need to fix
+    const deleteCallback = () => {props.deleteAffairCallback()}
 
     return (
         <div>
-            // show some text
+            {props.affair}
+            <span className={style.priopity}>{props.priority}</span>
+
 
             <button onClick={deleteCallback}>X</button>
         </div>

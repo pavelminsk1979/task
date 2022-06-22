@@ -1,3 +1,11 @@
-.someClass {
+.priopity {
+    height: 40px;
+    width: 40px;
+    border: 1px solid darkred;
+    background-color: darkred;
+    color: lawngreen;
+    border-radius: 10px;
+    margin-left: 20px;
+
 
 }

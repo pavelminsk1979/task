@@ -28,5 +28,5 @@ test('filter by middle', () => {
 })
 test('filter by low', () => {
     const newState = filterAffairs(initialState, 'low')
-    expect(newState.length).toBe(3)
+    expect(newState.length).toBe(2)
 })
