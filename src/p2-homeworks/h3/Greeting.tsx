@@ -1,28 +1,41 @@
-import React from 'react'
+import React, {ChangeEvent} from 'react'
 import s from './Greeting.module.css'
 
 type GreetingPropsType = {
-    name: any // need to fix any
-    setNameCallback: any // need to fix any
-    addUser: any // need to fix any
-    error: any // need to fix any
-    totalUsers: any // need to fix any
+    name:string
+    setNameCallback: (name:string)=>void
+    addUser: ()=>void
+    error: boolean
+    totalUsers: number
+    colbackError:(value: boolean)=>void
 }
 
-// презентационная компонента (для верстальщика)
-const Greeting: React.FC<GreetingPropsType> = (
-    {name, setNameCallback, addUser, error, totalUsers} // деструктуризация пропсов
-) => {
-    const inputClass = s.error // need to fix with (?:)
+export function Greeting (props:GreetingPropsType){
+    const inputClass = props.error? s.error:'' // need to fix with (?:)
+
+    const setNameCallback = (
+        e:ChangeEvent<HTMLInputElement>)=> {
+        props.setNameCallback(e.currentTarget.value)
+        props.colbackError(false)
+    }
+
+
 
     return (
         <div>
-            <input value={name} onChange={setNameCallback} className={inputClass}/>
-            <span>{error}</span>
-            <button onClick={addUser}>add</button>
-            <span>{totalUsers}</span>
+        <div>
+            <input
+                value={props.name}
+                onChange={setNameCallback}
+                className={inputClass}/>
+
+            <button onClick={props.addUser}>add</button>
+            <span>{props.totalUsers}</span>
+        </div>
+            {props.error&&<span className={s.errorText}>{'NAME IS REQUIRE!'}</span>}
+
         </div>
     )
 }
 
-export default Greeting
+

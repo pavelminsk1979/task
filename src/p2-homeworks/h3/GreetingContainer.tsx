@@ -1,31 +1,40 @@
 import React, {useState} from 'react'
-import Greeting from './Greeting'
+import {Greeting} from './Greeting'
+import {UserType} from "./HW3";
 
 type GreetingContainerPropsType = {
-    users: any // need to fix any
-    addUserCallback: any // need to fix any
+    users: Array<UserType>
+    addUserCallback: (name: string) => void
 }
 
-// более простой и понятный для новичков
-// function GreetingContainer(props: GreetingPropsType) {
 
-// более современный и удобный для про :)
-// уровень локальной логики
-const GreetingContainer: React.FC<GreetingContainerPropsType> = ({users, addUserCallback}) => { // деструктуризация пропсов
-    const [name, setName] = useState<any>('') // need to fix any
-    const [error, setError] = useState<any>('') // need to fix any
+export function GreetingContainer(props: GreetingContainerPropsType) {
+    const [name, setName] = useState<string>('')
+    const [error, setError] = useState<boolean>(false)
 
-    const setNameCallback = (e: any) => { // need to fix any
-        setName('') // need to fix
+    const setNameCallback = (name: string) => {
+        setName(name)
+
     }
+const colbackError = (value: boolean) => {
+    setError(value)
+}
+
     const addUser = () => {
-        alert(`Hello  !`) // need to fix
+        if (name.trim() !== '') {
+            props.addUserCallback(name.trim())
+            alert(`Hello ${name.trim()} !`)
+            setName('')
+        }else {
+            setError(true)
+        }
     }
 
-    const totalUsers = 0 // need to fix
+    const totalUsers = props.users.length
 
     return (
         <Greeting
+            colbackError={colbackError}
             name={name}
             setNameCallback={setNameCallback}
             addUser={addUser}
@@ -35,4 +44,4 @@ const GreetingContainer: React.FC<GreetingContainerPropsType> = ({users, addUser
     )
 }
 
-export default GreetingContainer
+
