@@ -1,7 +1,20 @@
-.default {
 
+
+.default {
+    margin-top: 5px;
+    background: silver;
+    color: brown;
+    border-radius: 5px;
+    border-color: purple;
+    margin-left: 5px;
+animation: blink 0.35s ease;
 }
 
 .red {
-    background: red;
+    margin-top: 5px;
+    background: firebrick;
+    color: mistyrose;
+    border-radius: 5px;
+    border-color: purple;
+    margin-left: 5px;
 }
