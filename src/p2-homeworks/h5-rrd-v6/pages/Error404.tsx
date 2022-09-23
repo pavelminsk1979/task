@@ -5,7 +5,7 @@ function Error404() {
         <div>
             <div>404</div>
             <div>Page not found!</div>
-            <div>НАЖМИ НА   preJunior... ВОН ТОТ КОТОРЫЙ ВЫШЕ НАПИСАН</div>
+            <div>НАЖМИ НА   preJunior... ВОН ТОТ КОТОРЫЙ КРАСНЕНЬКИЙ ВЫШЕ НАПИСАН</div>
         </div>
     )
 }
