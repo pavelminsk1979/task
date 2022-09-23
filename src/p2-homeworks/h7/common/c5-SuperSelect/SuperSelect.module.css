@@ -1,0 +1,34 @@
+.select{
+width: 100px;
+    padding: 5px;
+    padding-right: 50px;
+    cursor: pointer;
+    appearance: none;
+    background-color: #154909;
+    background-image: url("");
+    background-repeat: no-repeat,repeat;
+    background-position: right .7em top 40%, 0 0;
+    background-size: .65em auto, 100%;
+
+    border: 2px inset rgb(118, 118, 118);
+    color: #f4f463;
+}
+.select:focus{
+    outline: none;
+    border: #fc2600;
+}
+
+.option{
+color: #0b2453;
+    background: rgba(247, 181, 3, 0.97);
+}
+.option:checked{
+    background: #499a06;
+    color: palegoldenrod;
+}
+
+.option:hover{
+    box-shadow: 0 0 10px 100px #c71585 inset;
+    transition: all .2s ease-in-out;
+    background: #e76d5d;
+}
