@@ -7,25 +7,25 @@ function Clock() {
     const [show, setShow] = useState<boolean>(false)
 
     const stop = () => {
-        // stop
+     clearInterval(timerId)
     }
     const start = () => {
         stop()
-        const id: number = window.setInterval(() => {
-            // setDate
+        const id: number =+setInterval(() => {
+            setDate(new Date())
         }, 1000)
         setTimerId(id)
     }
 
     const onMouseEnter = () => {
-        // show
+        setShow(true)
     }
     const onMouseLeave = () => {
-        // close
+        setShow(false)
     }
 
-    const stringTime = 'Time' // fix with date
-    const stringDate = 'Date' // fix with date
+    const stringTime = date?.toLocaleTimeString() ||<br/> /*этими методами берется дата дня и года из операционной системы */
+    const stringDate = date?.toLocaleDateString() ||<br/>
 
     return (
         <div>
@@ -36,10 +36,12 @@ function Clock() {
                 {stringTime}
             </div>
 
-            {show && (
+            {show ? (
                 <div>
                     {stringDate}
                 </div>
+            ):(
+                <br/>/* этим невидимым тэгом достигаю---экран не дергается когда на этом месте ничего не видит пользователь...но есть невидимый тэг---норм тема  НО у этого тэга стандартный размер не изменить...поэтому если использовать не стандартный шрифт то всеравно будут дергания*/
             )}
 
             <SuperButton onClick={start}>start</SuperButton>

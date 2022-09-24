@@ -1,32 +1,49 @@
 import React from 'react'
-import {homeWorkReducer} from '../homeWorkReducer'
+import {homeWorkReducer, sortStateAge, sortStateName, sortStatusOptimist, sortStatusPissimist} from '../homeWorkReducer'
+import {UserType} from "../../HW8";
 
-let initialState: any[] // need to fix any
+let initialState: Array<UserType>
 
 beforeEach(() => {
     initialState = [
-        {_id: 0, name: 'Кот', age: 3},
-        {_id: 1, name: 'Александр', age: 66},
-        {_id: 2, name: 'Коля', age: 16},
-        {_id: 3, name: 'Виктор', age: 44},
-        {_id: 4, name: 'Дмитрий', age: 40},
-        {_id: 5, name: 'Ирина', age: 55},
+        {_id: 0, name: 'Кот', age: 3, status: '--и тут норм'},
+        {_id: 1, name: 'Александр', age: 66, status: '--поеду домой'},
+        {_id: 2, name: 'Коля', age: 16, status: '--поеду домой'},
+        {_id: 3, name: 'Виктор', age: 44, status: '--поеду домой'},
+        {_id: 4, name: 'Дмитрий', age: 40, status: '--поеду домой'},
+        {_id: 5, name: 'Ирина', age: 55, status: '--ну а как я кота одного оставлю'},
     ]
 })
 
-test('sort name up', () => {
-    const newState = homeWorkReducer(initialState, {type: 'sort', payload: 'up'})
+test('sort state name ', () => {
+    const newState = homeWorkReducer(initialState, sortStateName())
 
-    console.log(newState)
-    // expect(...).toBe(...)
+
+    expect(newState.length).toBe(6)
+    expect(newState[0].name).toBe('Александр')
 })
-test('sort name down', () => {
-    const newState = homeWorkReducer(initialState, {type: 'sort', payload: 'down'})
 
+
+test('sort state age', () => {
+    const newState = homeWorkReducer(initialState, sortStateAge())
+
+    expect(newState.length).toBe(6)
+    expect(newState[1].age).toBe(16)
+    expect(newState[0].name).toBe('Кот')
+})
+test('sort status pissimist', () => {
+    const newState = homeWorkReducer(initialState, sortStatusPissimist('--поеду домой'))
+
+    expect(newState.length).toBe(2)
+    expect(newState[1].age).toBe(55)
+    expect(newState[0].name).toBe('Кот')
 
 })
-test('check age 18', () => {
-    const newState = homeWorkReducer(initialState, {type: 'check', payload: 18})
 
+test('sort status optimist', () => {
+    const newState = homeWorkReducer(initialState, sortStatusOptimist('--поеду домой'))
 
+    expect(newState.length).toBe(4)
+    expect(newState[1].status).toBe('--поеду домой')
+    expect(newState[0].name).toBe('Александр')
 })

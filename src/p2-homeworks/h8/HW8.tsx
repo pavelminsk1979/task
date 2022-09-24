@@ -1,41 +1,77 @@
-import React, {useState} from 'react'
-import {homeWorkReducer} from './bll/homeWorkReducer'
+import React, {useReducer} from 'react'
+import {
+    addInitial,
+    homeWorkReducer,
+    sortStateAge,
+    sortStateName,
+    sortStatusOptimist, sortStatusPissimist
+} from './bll/homeWorkReducer'
 import SuperButton from '../h4/common/c2-SuperButton/SuperButton'
 
-// export type UserType =
 
-const initialPeople = [
-    {_id: 0, name: 'Кот', age: 3},
-    {_id: 1, name: 'Александр', age: 66},
-    {_id: 2, name: 'Коля', age: 16},
-    {_id: 3, name: 'Виктор', age: 44},
-    {_id: 4, name: 'Дмитрий', age: 40},
-    {_id: 5, name: 'Ирина', age: 55},
-]
+export type UserType = {
+    _id: number
+    name: string
+    age: number
+    status: string
+}
 
 function HW8() {
-    const [people, setPeople] = useState<any>(initialPeople) // need to fix any
+    const array =[
+        {_id: 0, name: 'Кот', age: 3, status: '--и тут норм'},
+        {_id: 1, name: 'Александр', age: 66, status: '--поеду домой'},
+        {_id: 2, name: 'Коля', age: 16, status: '--поеду домой'},
+        {_id: 3, name: 'Виктор', age: 44, status: '--поеду домой'},
+        {_id: 4, name: 'Дмитрий', age: 40, status: '--поеду домой'},
+        {_id: 5, name: 'Ирина', age: 55, status: '--ну а как я кота одного оставлю'},
+    ]
 
-    // need to fix any
-    const finalPeople = people.map((p: any) => (
+    const [people, dispatchPeople] = useReducer(homeWorkReducer, array)
+
+    const finalPeople = people.map((p: UserType) => (
         <div key={p._id}>
-            some name, age
+            samaritanin {p._id}...
+            name {p.name}...
+            age {p.age}...
+            status{p.status}
         </div>
     ))
 
-    const sortUp = () => setPeople(homeWorkReducer(initialPeople, {type: 'sort', payload: 'up'}))
+    const sortName = () => {
+        dispatchPeople(addInitial(array))
+        dispatchPeople(sortStateName())
+    }
+
+    const sortAge = () => {
+        dispatchPeople(addInitial(array))
+        dispatchPeople(sortStateAge())
+    }
+
+    const statusOptimist = () =>{
+        dispatchPeople(addInitial(array))
+        dispatchPeople(sortStatusOptimist('--поеду домой'))
+    }
+
+     const statusPessimist = () => {
+         dispatchPeople(addInitial(array))
+         dispatchPeople(sortStatusPissimist('--поеду домой'))
+     }
 
     return (
         <div>
             <hr/>
             homeworks 8
 
-            {/*should work (должно работать)*/}
             {finalPeople}
 
-            <div><SuperButton onClick={sortUp}>sort up</SuperButton></div>
-            <div>sort down</div>
-            check 18
+            <div>
+                <SuperButton onClick={sortName}>sort Name</SuperButton>
+                <SuperButton onClick={sortAge}>sort Age</SuperButton>
+                <SuperButton onClick={statusOptimist}>status optimist</SuperButton>
+                 <SuperButton onClick={statusPessimist}>status pessimist</SuperButton>
+            </div>
+            <div>сортировка саморитян</div>
+            проверка на патриотизм
 
             <hr/>
             {/*для личного творчества, могу проверить*/}
